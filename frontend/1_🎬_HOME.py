@@ -10,13 +10,11 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",  
 )
-movie_dict_url ='https://github.com/CosecSin/VisionForge/blob/05c664e7e7bf597782f1b404baad1098a01530df/frontend/movie-files/movie_dict.pkl'
 
 # Load movies data from pickle file
-response = requests.get(movie_dict_url)
-movie_dict = pickle.loads(response.content) 
+movies_dict = pickle.load(open('./frontend/movie-files/movie_dict.pkl', 'rb'))
 movies_df = pd.DataFrame(movies_dict)
-similarity = pickle.load(open('./movie-files/similarity.pkl', 'rb'))
+similarity = pickle.load(open('./frontend/movie-files/similarity.pkl', 'rb'))
 
 # Function to fetch movie poster
 def fetch_Poster(id):
