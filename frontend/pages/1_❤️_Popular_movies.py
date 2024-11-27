@@ -20,7 +20,7 @@ def load_pickle_from_url(url):
         return None
 
 # Load movies data from pickle file
-best_movies = load_pickle_from_url(movie_dict_url)
+best_movies = load_pickle_from_url(best_movies_url)
 
 # Function to fetch movie poster
 def fetch_Poster(id):
