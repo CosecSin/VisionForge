@@ -9,9 +9,17 @@ st.set_page_config(
     layout="wide",
 )
 
+genre_movie_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/genres_movie_list.pkl"
+
+def load_pickle_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pickle.loads(response.content)
+    else:
+        st.error(f"Failed to load file from URL: {url}")
+        return None
 # Load movies data from pickle file
-with open('../frontend/movie-files/genres_movie_list.pkl', 'rb') as f:
-    Movies = pickle.load(f)
+Movies =  load_pickle_from_url(genre_movie_url)
 
 Movies = Movies.sort_values('rating', ascending=False)
 
@@ -79,7 +87,7 @@ def getGenreWise_movies(genres, limit):
     return popular_movies, recommended_movies_poster, links, movie_id
 
 
-with open('style.css') as f:
+with open('./frontend/style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Streamlit layout
