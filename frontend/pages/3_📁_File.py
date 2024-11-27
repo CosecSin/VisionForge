@@ -13,15 +13,30 @@ st.set_page_config(
 )
 
 # Load movies data from pickle file
-movies_dict = pickle.load(open('../frontend/movie-files/movie_dict.pkl', 'rb'))
+movie_dict_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/movie_dict.pkl"
+similarity_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/similarity.pkl"
+best_movies_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/Best_movies.pkl"
+
+# Function to load pickle file from a URL
+def load_pickle_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pickle.loads(response.content)
+    else:
+        st.error(f"Failed to load file from URL: {url}")
+        return None
+        
+# Load movies data from pickle file
+movies_dict = load_pickle_from_url(movie_dict_url)
 movies_df = pd.DataFrame(movies_dict)
-similarity = pickle.load(open('../frontend/movie-files/similarity.pkl', 'rb'))
+similarity = load_pickle_from_url(similarity_url)
+
+
 
 st.header("Movies list")
 st.write(movies_df)
 
-with open('movie-files/Best_movies.pkl', 'rb') as f:
-    Popular_movies = pickle.load(f)
+Popular_movies = load_pickle_from_url(best_movies_url)
 
 st.header("Popular Movie List")
 st.write(Popular_movies)
