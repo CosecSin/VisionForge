@@ -8,12 +8,13 @@ st.set_page_config(
     page_title="VisionForge",
     page_icon="🎬",
     layout="wide",
-    initial_sidebar_state="expanded",
-    
+    initial_sidebar_state="expanded",  
 )
+movie_dict_url ='https://github.com/CosecSin/VisionForge/blob/05c664e7e7bf597782f1b404baad1098a01530df/frontend/movie-files/movie_dict.pkl'
 
 # Load movies data from pickle file
-movies_dict = pickle.load(open('/frontend/movie-files/movie_dict.pkl', 'rb'))
+response = requests.get(movie_dict_url)
+movie_dict = pickle.loads(response.content) 
 movies_df = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('./movie-files/similarity.pkl', 'rb'))
 
