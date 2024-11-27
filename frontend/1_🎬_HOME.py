@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Load movies data from pickle file
-movies_dict = pickle.load(open('frontend/movie-files/movie_dict.pkl', 'rb'))
+movies_dict = pickle.load(open('/frontend/movie-files/movie_dict.pkl', 'rb'))
 movies_df = pd.DataFrame(movies_dict)
 similarity = pickle.load(open('./movie-files/similarity.pkl', 'rb'))
 
