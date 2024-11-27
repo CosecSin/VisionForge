@@ -17,6 +17,7 @@ st.set_page_config(
 movie_dict_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/movie_dict.pkl"
 similarity_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/similarity.pkl"
 best_movies_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/Best_movies.pkl"
+genre_movie_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/genres_movie_list.pkl"
 
 # Function to load pickle file from a URL
 def load_pickle_from_url(url):
@@ -42,8 +43,7 @@ Popular_movies = load_pickle_from_url(best_movies_url)
 st.header("Popular Movie List")
 st.write(Popular_movies)
 
-with open('movie-files/genres_movie_list.pkl', 'rb') as f:
-    Movies = pickle.load(f)
+Movies =  load_pickle_from_url(genre_movie_url)
 
 Movies = Movies.sort_values('rating', ascending=False)
 
