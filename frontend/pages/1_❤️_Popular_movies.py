@@ -9,10 +9,18 @@ st.set_page_config(
     page_icon="❤️",
     layout="wide",
 )
+best_movies_url = "https://github.com/CosecSin/VisionForge/raw/main/frontend/movie-files/Best_movies.pkl"
+
+def load_pickle_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pickle.loads(response.content)
+    else:
+        st.error(f"Failed to load file from URL: {url}")
+        return None
 
 # Load movies data from pickle file
-with open('../frontend/movie-files/Best_movies.pkl', 'rb') as f:
-    Movies = pickle.load(f)
+best_movies = load_pickle_from_url(movie_dict_url)
 
 # Function to fetch movie poster
 def fetch_Poster(id):
@@ -73,7 +81,7 @@ def getPopular_movies(range):
     
 
 
-with open('./style.css') as f:
+with open('./frontend/style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Streamlit layout
