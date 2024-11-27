@@ -63,7 +63,7 @@ def fetch_links(id):
 
 # Function to get Popular Movies
 def getPopular_movies(range):
-    movie_list = Movies.to_dict(orient='records')  # Convert DataFrame to a list of dictionaries
+    movie_list = best_movies.to_dict(orient='records')  # Convert DataFrame to a list of dictionaries
 
     polular_movies = []
     popular_movies_poster = []
